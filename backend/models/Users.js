@@ -17,7 +17,8 @@ const UsersSchema = new Schema({
           return !user;
         }
         return true;
-      }
+      },
+      message: 'This user is already registered'
     }
   },
   password: {
@@ -34,12 +35,14 @@ const UsersSchema = new Schema({
   },
   avatar: String,
   facebookID: String,
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Users',
-    }
-  ]
+  subscription: {
+    type: Array,
+    default: [],
+  },
+  subscribers: {
+    type: Array,
+    default: [],
+  }
 });
 
 UsersSchema.pre('save', async function (next) {

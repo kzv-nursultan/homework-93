@@ -1,0 +1,17 @@
+export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
+export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
+export const REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE';
+export const REGISTER_USER = 'REGISTER_USER';
+
+export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
+export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
+export const LOGIN_USER = 'LOGIN_USER';
+
+export const registerRequest = () => ({type: REGISTER_USER_REQUEST});
+export const registerUserSuccess = value => ({type: REGISTER_USER_SUCCESS, value});
+export const registerUserFailure = error => ({type: REGISTER_USER_FAILURE, error});
+
+export const loginUserRequest = () => ({type: LOGIN_USER_REQUEST});
+export const loginUserSuccess = value => ({type: LOGIN_USER_SUCCESS, value});
+export const loginUserFailure = error => ({type: LOGIN_USER_FAILURE, error});

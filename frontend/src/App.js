@@ -1,25 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import ButtonAppBar from "./components/UI/AppBar/AppBar";
+import MainPage from "./containers/MainPage/MainPage";
+import SignUp from "./containers/SignUp/SignUp";
+import SignIn from "./containers/SignIn/SignIn";
+import {useSelector} from "react-redux";
 
-function App() {
+const ProtectedRoute = ({isAllowed, redirectTo, ...props}) => {
+  return isAllowed ?
+    <Route {...props} /> :
+    <Redirect to={redirectTo}/>;
+};
+
+const App = () => {
+  const user = useSelector(state => state?.users.user);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ButtonAppBar/>
+      <Switch>
+        <ProtectedRoute
+        isAllowed={user._id}
+        path='/'
+        exact
+        component={MainPage}
+        redirectTo='/register' />
+
+        <Route path='/register' component={SignUp} />
+        <Route path='/login' component={SignIn}/>
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
